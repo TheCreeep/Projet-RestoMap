@@ -1,0 +1,3 @@
+[submodule "RestoMapApi"]
+	path = RestoMapApi
+	url = https://github.com/TheCreeep/RestoMapApi
