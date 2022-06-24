@@ -2,7 +2,6 @@
   <div>
     <IndexNavbar />
     <div class="content">
-    dzadazda
       <Nuxt />
     </div>
   </div>

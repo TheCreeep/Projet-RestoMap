@@ -22,6 +22,13 @@
         >
           Restos
         </vs-navbar-item>
+        <vs-navbar-item
+          id="explore"
+          :active="active == 'explore'"
+          @click="$router.push('/explore')"
+        >
+          Explore
+        </vs-navbar-item>
       </template>
     </vs-navbar>
   </div>
