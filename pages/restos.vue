@@ -11,9 +11,10 @@
         <vs-input v-model="name" label="Name" />
         <vs-button @click="searchHandle()">Rechercher</vs-button>
       </div>
+
+      <h3 class="title">Cliquez sur un restaurant pour voir sa page</h3>
       <div class="content">
         <div class="search-results">
-          <!-- Tab with searchresult -->
           <vs-table>
             <template #thead>
               <vs-tr>
@@ -27,6 +28,7 @@
                 v-for="(restaurant, i) in searchResult"
                 :key="i"
                 :data="restaurant"
+                @click="goToRestaurant(restaurant.restaurant_id)"
               >
                 <vs-td> {{ restaurant.fullName }} </vs-td>
                 <vs-td> {{ restaurant.fullAddress }} </vs-td>
@@ -37,7 +39,6 @@
         </div>
       </div>
     </div>
-    <!-- Tableau avec les différentes valeurs des passager dans le computed -->
   </div>
 </template>
 
@@ -59,6 +60,10 @@ export default {
   methods: {
     searchHandle() {
       this.$store.dispatch('GET_RESTAURANTS_BY_NAME', this.name)
+    },
+    goToRestaurant(id) {
+      this.$store.dispatch('GET_RESTAURANTS_BY_ID', id)
+      this.$router.push('/restaurant/' + id)
     },
   },
 }
@@ -83,7 +88,6 @@ export default {
     flex-direction: column;
     padding: 1em;
     gap: 4em;
-
   }
 }
 </style>

@@ -8,6 +8,7 @@ const state = () => ({
     restaurantByFilters: [],
     allCuisines: [],
     allBoroughs: [],
+    selectedRestaurant: {},
 
 })
 
@@ -17,6 +18,10 @@ const actions = {
         name = name.replace("&", "%26");
         const response = await this.$axios.get(`/api/data/name_search?name=${name}`)
         commit('SET_RESULTS_BY_NAME', response.data)
+    },
+    async GET_RESTAURANTS_BY_ID({ commit }, id) {
+        const response = await this.$axios.get(`/api/data/id_search?id=${id}`)
+        commit('SET_SELECTED_RESTAURANT', response.data[0])
     }
     ,
     async GET_RESTAURANTS_BY_FILTERS({ commit }, payload) {
@@ -45,6 +50,21 @@ const actions = {
         commit('SET_ALL_BOROUGHS', response.data)
     }
 
+    ,
+    async ADD_GRADE({ commit }, payload) {
+        const { id, grade, score, date } = payload
+        const response = await this.$axios.post(`/api/data/add_grade?id=${id}`, {
+            date,
+            grade,
+            score,
+        })
+        commit('ADD_NEW_GRADE', {
+            date,
+            grade,
+            score,
+        })
+
+    }
 }
 
 const mutations = {
@@ -59,6 +79,12 @@ const mutations = {
     },
     SET_ALL_BOROUGHS: (state, payload) => {
         state.allBoroughs = payload
+    },
+    SET_SELECTED_RESTAURANT: (state, payload) => {
+        state.selectedRestaurant = payload
+    },
+    ADD_NEW_GRADE: (state, payload) => {
+        state.selectedRestaurant.grades.push(payload)
     }
 }
 

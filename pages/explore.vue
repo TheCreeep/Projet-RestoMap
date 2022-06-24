@@ -46,6 +46,8 @@
                 v-for="(restaurant, i) in searchResult"
                 :key="i"
                 :data="restaurant"
+                @click="goToRestaurant(restaurant.restaurant_id)"
+                
               >
                 <vs-td> {{ restaurant.fullName }} </vs-td>
                 <vs-td> {{ restaurant.fullAddress }} </vs-td>
@@ -56,7 +58,6 @@
         </div>
       </div>
     </div>
-    <!-- Tableau avec les différentes valeurs des passager dans le computed -->
   </div>
 </template>
 
@@ -92,6 +93,10 @@ export default {
         cuisine: this.cuisineInput,
         borough: this.boroughInput,
       })
+    },
+    goToRestaurant(id) {
+      this.$store.dispatch('GET_RESTAURANTS_BY_ID', id)
+      this.$router.push('/restaurant/' + id)
     },
     getCuisines() {
       this.$store.dispatch('GET_ALL_CUISINES')
