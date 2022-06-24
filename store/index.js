@@ -64,6 +64,27 @@ const actions = {
             score,
         })
 
+    },
+    async ADD_RESTAURANT({ commit }, payload) {
+        const response = await this.$axios.post(`/api/data/add_restaurant`, payload)
+            .then(response => {
+                this.$router.push('/restaurant/' + response.data.restaurant_id)
+                this._vm.vs.$notification.success({
+                    title: 'Success',
+                    message: 'Restaurant ajouté avec succès',
+                    type: 'success',
+                    duration: 3000
+                })
+            })
+            .catch(error => {
+                console.log(error)
+                this._vm.vs.$notification.error({
+                    title: 'Erreur',
+                    message: 'Erreur lors de l\'ajout du restaurant',
+                    type: 'error',
+                    duration: 3000
+                })
+            })
     }
 }
 
@@ -85,7 +106,7 @@ const mutations = {
     },
     ADD_NEW_GRADE: (state, payload) => {
         state.selectedRestaurant.grades.push(payload)
-    }
+    },
 }
 
 

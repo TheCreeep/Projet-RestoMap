@@ -29,6 +29,13 @@
         >
           Explore
         </vs-navbar-item>
+        <vs-navbar-item
+          id="addresto"
+          :active="active == 'addresto'"
+          @click="$router.push('/addresto')"
+        >
+          Ajouter un restaurant
+        </vs-navbar-item>
       </template>
     </vs-navbar>
   </div>
