@@ -16,11 +16,11 @@
           Accueil
         </vs-navbar-item>
         <vs-navbar-item
-          id="search"
-          :active="active == 'search'"
-          @click="$router.push('/search')"
+          id="restos"
+          :active="active == 'restos'"
+          @click="$router.push('/restos')"
         >
-          Recherche
+          Restos
         </vs-navbar-item>
       </template>
     </vs-navbar>
